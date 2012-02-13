@@ -205,12 +205,7 @@
           <h2>You&rsquo;re riding Ruby on Rails!</h2>
         </div>
 
-        <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
-        </div>
-
-        <div id="getting-started">
+        <div id="Terry Higbee">
           <h1>Terry Higbee -- UMBC/IS698 Spring 2012</h1>
           <h2>Homework assignments:</h2>
 	  <h2>My <i>gl</i> link: <a href="http://userpages.umbc.edu/~thigbee1/IS698/IS698-Higbee-TOC.html">http://userpages.umbc.edu/~thigbee1/IS698/IS698-Higbee-TOC.html</a></h2>
@@ -224,7 +219,6 @@
             <li>
               <h2>Demo App</h2>
               <p>Using Rails scaffolding to create a rudimentary micropost app.</p>
-	      <p>My </p>
             </li>
 
             <li>
