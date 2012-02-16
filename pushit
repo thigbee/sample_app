@@ -1,7 +1,6 @@
 #!/bin/bash
 # pushit
 
-#read -p "Git text: " text
 echo $1
 git add .
 git commit -m "$1"
