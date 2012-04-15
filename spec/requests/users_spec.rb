@@ -40,24 +40,42 @@ describe "Users" do
 
     describe "failure" do
       it "should not sign a user in" do
-          visit signin_path
-          fill_in :email, :with => ""
-          fill_in :password, :with => ""
-          click_button
-          response.should have_selector("div.flash.error", :content => "Invalid")
+        user = Factory(:user)  # I tried all kind of varients (shown below) without
+                               # this line, but only putting this line inseemed to
+                               # work.  I'm not sure why.
+        user.email = ""
+        user.password = ""
+        integration_sign_in(user)
+        # I have made several attempts to make the ""integration_sign_in" function
+        # work in this test (as it does in the test below).  None worked, including:
+        
+          #  1:   integration_sign_in()
+          
+          #  2:   integration_sign_in(nil,nil)
+        
+          #  3:   niluser = { :email => "", :password => ""}
+          #       integration_sign_in(niluser)
+          
+          #  4:   user.email = ""
+          #       user.password = ""
+          #       integration_sign_in(niluser)
+          
+          #  Since I couldn't get any of these to work, I left the code as is'
+        #visit signin_path
+        #fill_in :email, :with => ""
+        #fill_in :password, :with => ""
+        #click_button
+        response.should have_selector("div.flash.error", :content => "Invalid")
       end
     end
 
     describe "success" do
       it "should sign a user in and out" do
         user = Factory(:user)
-        visit signin_path
-        fill_in :email, :with => user.email
-        fill_in :password, :with => user.password
-        click_button
+        integration_sign_in(user)
         controller.should be_signed_in
         click_link "Sign out"
-      controller.should_not be_signed_in
+        controller.should_not be_signed_in
       end
     end
   end
