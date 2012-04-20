@@ -35,6 +35,10 @@ module SessionsHelper
     redirect_to(session[:return_to] || default)
     clear_return_to
   end
+  
+  def deny_action
+    redirect_to root_path, :notice => "You are already signed in"
+  end
 
   private
 
