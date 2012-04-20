@@ -56,6 +56,26 @@ describe UsersController do
                                            :content => "Next")
       end
     end
+    
+    describe "as an admin user" do
+      
+      it "should show 'delete' links" do
+        admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(admin)
+        get :index
+        response.should contain("delete")
+      end
+    end
+    
+    describe "as an non-admin user" do
+    
+      it "should not show a 'delete' link" do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        get :index
+        response.should_not contain("delete")
+      end
+    end
   end
 
   describe "GET 'show'" do
