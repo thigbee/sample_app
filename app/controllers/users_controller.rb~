@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => :destroy
   before_filter :signed_in_user, :only => [:new, :create]
+  before_filter :self_check, :only => :destroy
 
   def show
    @user = User.find(params[:id])
@@ -77,6 +78,14 @@ class UsersController < ApplicationController
     
     def signed_in_user
       deny_action if signed_in?
+    end
+    
+    def self_check
+      @user = User.find(params[:id])
+      if current_user?(@user)
+        redirect_to(users_path) if current_user?(@user)
+        flash[:failure] = "Admin users may not delete themselves."
+      end
     end
     
 end
