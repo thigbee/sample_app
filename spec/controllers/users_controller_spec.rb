@@ -122,7 +122,28 @@ describe UsersController do
       mp2 = Factory(:micropost, :user => @user, :content => "Baz quux")
       get :show, :id => @user      
       response.should have_selector("td.sidebar.round", :content => "Microposts 2")
-    end        
+    end 
+    
+    it "should paginate microposts" do
+      50.times do
+        Factory(:micropost, :user => @user, :content => "Foo bar")
+      end
+      get :show, :id => @user
+      response.should have_selector("div.pagination")
+      response.should have_selector("span.disabled", :content => "Previous")
+      response.should have_selector("a", :href => "/users/1?page=2",
+                                         :content => "2")
+      response.should have_selector("a", :href => "/users/1?page=2",
+                                         :content => "Next")
+    end     
+    
+    
+    
+    
+    
+    
+    
+           
   end
 
 

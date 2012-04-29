@@ -67,15 +67,32 @@ describe MicropostsController do
         mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
         mp2 = Factory(:micropost, :user => @user, :content => "Baz quux")
         post :create
-        response.should have_selector("span.microposts", :content => "1 microposts")
+        response.should have_selector("span.microposts", :content => "2 microposts")
         end
     
       it "should provide the number of user microposts--singular" do
         mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
         post :create
-        response.should have_selector("span.microposts", :content => "2 micropost")
+        response.should have_selector("span.microposts", :content => "1 micropost")
       end
-    end
+      
+      
+
+      it "should paginate microposts" do
+        50.times do
+          Factory(:micropost, :user => @user, :content => "Foo bar")
+        end
+        post :create, :micropost => @attr
+        response.should have_selector("div.pagination")
+        response.should have_selector("span.disabled", :content => "Previous")
+        response.should have_selector("a", :href => "/?page=2",
+                                           :content => "2")
+        response.should have_selector("a", :href => "/?page=2",
+                                           :content => "Next")
+      end      
+    
+    end       
+    
   end
   
   describe "DELETE 'destroy'" do

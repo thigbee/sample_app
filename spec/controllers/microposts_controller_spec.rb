@@ -74,8 +74,10 @@ describe MicropostsController do
         mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
         post :create
         response.should have_selector("span.microposts", :content => "1 micropost")
-      end
-    end
+      end     
+    
+    end       
+    
   end
   
   describe "DELETE 'destroy'" do
