@@ -60,6 +60,22 @@ describe MicropostsController do
         flash[:success].should =~ /micropost created/i
       end
     end
+
+    describe "sidebar content" do
+      
+      it "sidebar should provide the number of user microposts--plural" do
+        mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
+        mp2 = Factory(:micropost, :user => @user, :content => "Baz quux")
+        post :create
+        response.should have_selector("span.microposts", :content => "2 microposts")
+        end
+    
+      it "should provide the number of user microposts--singular" do
+        mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
+        post :create
+        response.should have_selector("span.microposts", :content => "1 micropost")
+      end
+    end
   end
   
   describe "DELETE 'destroy'" do
