@@ -95,6 +95,12 @@ describe MicropostsController do
         delete :destroy, :id => @micropost
         response.should redirect_to(root_path)
       end
+
+      it "should not have 'delete' links'" do
+        delete :destroy, :id => @micropost
+        response.should_not have_selector("a", :href => "/micropost")
+      end
+
     end
     
     describe "for an authorized user" do

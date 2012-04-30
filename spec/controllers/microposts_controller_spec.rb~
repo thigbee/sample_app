@@ -74,22 +74,7 @@ describe MicropostsController do
         mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
         post :create
         response.should have_selector("span.microposts", :content => "1 micropost")
-      end
-      
-      
-
-      it "should paginate microposts" do
-        50.times do
-          Factory(:micropost, :user => @user, :content => "Foo bar")
-        end
-        post :create, :micropost => @attr
-        response.should have_selector("div.pagination")
-        response.should have_selector("span.disabled", :content => "Previous")
-        response.should have_selector("a", :href => "/?page=2",
-                                           :content => "2")
-        response.should have_selector("a", :href => "/?page=2",
-                                           :content => "Next")
-      end      
+      end     
     
     end       
     
@@ -110,6 +95,12 @@ describe MicropostsController do
         delete :destroy, :id => @micropost
         response.should redirect_to(root_path)
       end
+
+      it "should not have 'delete' links'" do
+        delete :destroy, :id => @micropost
+        response.should_not have.selector("a", :content => @micropost)
+      end
+
     end
     
     describe "for an authorized user" do
