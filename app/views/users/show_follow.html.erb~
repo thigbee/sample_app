@@ -13,7 +13,7 @@
     </td>
 
     <td class="sidebar round">
-      <%= render 'shared/user_info' %>
+      <%= render 'shared/user_path' %>
       <%= render 'shared/stats' %>
       <% unless @users.empty? %>
         <% @users.each do |user| %>
