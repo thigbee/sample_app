@@ -276,5 +276,20 @@ describe User do
       @user.follow!(@followed)
       @followed.followers.should include(@user)
     end
+
+    # The following two tests are for Exercise 12.5.1    
+    it"should remove a 'followed' relationship when a user is deleted" do
+      @user.follow!(@followed)
+      @followed.destroy
+      @user.should_not be_following(@followed)
+    end
+    
+    it"it should remove a 'following' relationship when a user is deleted" do
+      @user.follow!(@followed)
+      @user.destroy
+      @followed.should_not be_following(@user)
+    end   
+    
+    
   end
 end

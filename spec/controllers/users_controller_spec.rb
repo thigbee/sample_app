@@ -135,15 +135,7 @@ describe UsersController do
                                          :content => "2")
       response.should have_selector("a", :href => "/users/1?page=2",
                                          :content => "Next")
-    end     
-    
-    
-    
-    
-    
-    
-    
-           
+    end          
   end
 
 

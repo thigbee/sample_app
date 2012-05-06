@@ -197,7 +197,7 @@ describe User do
       it "should not include a different user's microposts" do
         mp3 = Factory(:micropost,
                       :user => Factory(:user, :email => Factory.next(:email)))
-        @user.feed.should include(mp3)
+        @user.feed.should_not include(mp3)
       end
       
       it "should include the microposts of followed users" do
@@ -276,5 +276,22 @@ describe User do
       @user.follow!(@followed)
       @followed.followers.should include(@user)
     end
+
+    # The following two tests are for Exercise 12.5.1    
+    it"should remove a 'followed' relationship when a user is deleted" do
+      @user.follow!(@followed)
+      @followed.destroy
+      @user.should_not be_following(@followed)
+    end
+    
+    it"it should remove a 'following' relationship when a user is deleted" do
+      @following = Factory(:user)
+      @following.follow!(@user)
+      @following.destroy
+      @user.should_not be_followed_by(@following)
+      @user.following?(@following).should be 'false'
+    end   
+    
+    
   end
 end
