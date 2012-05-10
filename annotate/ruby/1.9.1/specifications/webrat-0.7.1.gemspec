@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/brynary/webrat"
   s.require_paths = ["lib"]
   s.rubyforge_project = "webrat"
-  s.rubygems_version = "1.8.15"
+  s.rubygems_version = "1.8.24"
   s.summary = "Ruby Acceptance Testing for Web applications"
 
   if s.respond_to? :specification_version then

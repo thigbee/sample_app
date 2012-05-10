@@ -50,10 +50,8 @@ describe UsersController do
         get :index
         response.should have_selector("div.pagination")
         response.should have_selector("span.disabled", :content => "Previous")
-        response.should have_selector("a", :href => "/users?page=2",
-                                           :content => "2")
-        response.should have_selector("a", :href => "/users?page=2",
-                                           :content => "Next")
+        response.should have_selector("a", :content => "2")
+        response.should have_selector("a", :content => "Next")
       end
     end
     
@@ -82,6 +80,7 @@ describe UsersController do
 
     before(:each) do
       @user = Factory(:user)
+      test_sign_in(@user)
     end
 
     it "should be successful" do
@@ -121,7 +120,7 @@ describe UsersController do
       mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
       mp2 = Factory(:micropost, :user => @user, :content => "Baz quux")
       get :show, :id => @user      
-      response.should have_selector("td.sidebar.round", :content => "Microposts 2")
+      response.should have_selector("td.sidebar.round", :content => "2 microposts")
     end 
     
     it "should paginate microposts" do
@@ -131,10 +130,8 @@ describe UsersController do
       get :show, :id => @user
       response.should have_selector("div.pagination")
       response.should have_selector("span.disabled", :content => "Previous")
-      response.should have_selector("a", :href => "/users/1?page=2",
-                                         :content => "2")
-      response.should have_selector("a", :href => "/users/1?page=2",
-                                         :content => "Next")
+      response.should have_selector("a", :content => "2")
+      response.should have_selector("a", :content => "Next")
     end          
   end
 

@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://thoughtbot.com/projects/factory_girl"
   s.rdoc_options = ["--line-numbers", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.15"
+  s.rubygems_version = "1.8.24"
   s.summary = "factory_girl provides a framework and DSL for defining and using model instance factories."
 
   if s.respond_to? :specification_version then

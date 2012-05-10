@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "faker"
-  s.rubygems_version = "1.8.15"
+  s.rubygems_version = "1.8.24"
   s.summary = "A port of Perl's Data::Faker - Generates fake names, phone numbers, etc."
 
   if s.respond_to? :specification_version then
